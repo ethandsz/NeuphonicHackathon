@@ -72,7 +72,7 @@ def main():
             break
             
         # Resize frame for faster processing
-        frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)
+        frame = cv2.resize(frame, (0, 0), fx=0.1, fy=0.1)
         
         # Process frame
         detections = process_frame(frame, model)
@@ -83,7 +83,7 @@ def main():
         # Audio feedback for detections
         for detection in detections:
             label, conf = detection[4], detection[5]
-            text = f"Detected {label} with confidence {conf:.2f}"
+            text = f"{label}"
             with AudioPlayer() as player:
                 response = sse.send(text, tts_config=tts_config)
                 player.play(response)
