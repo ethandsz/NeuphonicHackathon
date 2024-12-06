@@ -58,7 +58,7 @@ def main():
     sse, tts_config = setup_neuphonic(api_key)
     
     # Open video capture
-    video_path = "Screen Recording 2024-12-06 at 19.34.41.mov"
+    video_path = "NeuphonicHackathon/Screen Recording 2024-12-06 at 19.34.41.mov"
     cap = cv2.VideoCapture(video_path)
     
     if not cap.isOpened():
