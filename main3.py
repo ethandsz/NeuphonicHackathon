@@ -61,7 +61,9 @@ class DetectionSystem:
                 if not self.audio_queue.empty() and not self.is_speaking:
                     text = self.audio_queue.get()
                     self.is_speaking = True
+                    print("Text = ", text)
                     response = self.sse.send(text, tts_config=self.tts_config)
+                    print("Response = ", response)
                     player.play(response)
                     time.sleep(0.5)  # Added small pause after each announcement
                     self.is_speaking = False
@@ -91,10 +93,11 @@ def draw_detections(frame, detections):
     return frame
 
 def main():
-    api_key = "143e2f6bd9a8c80ef8ed940ab10cbae9630c8927dce524d65de85dcd1613f8a0.ec7715cc-37e6-4590-8265-e6528ec1125e"
+    api_key = "f9e23b3ee234b4248ce53dde280a725594080964b4fec676562c1829fe91dd1c.091f2125-f7c9-4650-ba3d-55a54104cb67"
+    # api_key = "143e2f6bd9a8c80ef8ed940ab10cbae9630c8927dce524d65de85dcd1613f8a0.ec7715cc-37e6-4590-8265-e6528ec1125e"
     system = DetectionSystem(api_key)
     
-    video_path = "NeuphonicHackathon/Screen Recording 2024-12-06 at 19.34.41.mov"
+    video_path = "indoor_3.mp4"
     cap = cv2.VideoCapture(video_path)
     
     if not cap.isOpened():
@@ -104,7 +107,7 @@ def main():
     cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
     
     frame_count = 0
-    process_every_n_frames = 3
+    process_every_n_frames = 1
     
     while True:
         ret, frame = cap.read()
